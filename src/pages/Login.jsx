@@ -34,7 +34,7 @@ function Login() {
             📅
           </div>
           <div>
-            <p className='font-semibold text-[#1a1a18]'>AgendaVerde</p>
+            <p className='font-semibold text-[#1a1a18]'>Sandim Jardinagem</p>
             <p className='text-xs text-gray-400'>Gestão de agendamentos</p>
           </div>
         </div>

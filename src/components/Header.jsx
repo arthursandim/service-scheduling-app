@@ -15,7 +15,7 @@ function Header({ userName }) {
           <div className='w-8 h-8 bg-[#3d7a52] rounded-lg flex items-center justify-center text-white text-sm'>
             📅
           </div>
-          <span className='font-semibold text-[#1a1a18]'>AgendaVerde</span>
+          <span className='font-semibold text-[#1a1a18]'>Sandim Jardinagem</span>
         </div>
         <div className='flex items-center gap-4'>
           <span className='text-sm text-gray-500'>
