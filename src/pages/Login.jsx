@@ -12,6 +12,9 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setErro('')
+    if (!email.trim()) { setErro('O e-mail é obrigatório.'); return }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setErro('Digite um e-mail válido.'); return }
+    if (!senha) { setErro('A senha é obrigatória.'); return }
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
         method: 'POST',

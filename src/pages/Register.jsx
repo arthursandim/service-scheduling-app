@@ -16,7 +16,9 @@ function Register() {
         setErro('')
         if (!nome.trim()) { setErro('O nome é obrigatório.'); return }
         if (!email.trim()) { setErro('O e-mail é obrigatório.'); return }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setErro('Digite um e-mail válido.'); return }
         if (!senha) { setErro('A senha é obrigatória.'); return }
+        if (senha.length < 8) { setErro('A senha deve ter pelo menos 8 caracteres.'); return }
         setLoading(true)
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
