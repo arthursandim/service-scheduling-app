@@ -14,6 +14,9 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setErro('')
+        if (!nome.trim()) { setErro('O nome é obrigatório.'); return }
+        if (!email.trim()) { setErro('O e-mail é obrigatório.'); return }
+        if (!senha) { setErro('A senha é obrigatória.'); return }
         setLoading(true)
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
