@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import StatusBadge from '../components/StatusBadge'
+import StatCard from '../components/StatCard'
 
 function Dashboard() {
   const [appointments, setAppointments] = useState([])
@@ -36,21 +37,9 @@ function Dashboard() {
         <p className='text-sm text-gray-400 mb-6'>Seus atendimentos de serviços de jardinagem</p>
 
         <div className='grid grid-cols-3 gap-4 mb-6'>
-          <div className='bg-white border border-gray-200 rounded-xl p-5'>
-            <p className='text-xs text-gray-400 uppercase tracking-wide mb-2'>Total</p>
-            <p className='text-3xl font-bold text-[#1a1a18]'>{total}</p>
-            <p className='text-sm text-gray-400 mt-1'>agendamentos</p>
-          </div>
-          <div className='bg-white border border-gray-200 rounded-xl p-5'>
-            <p className='text-xs text-gray-400 uppercase tracking-wide mb-2'>Hoje</p>
-            <p className='text-3xl font-bold text-[#1a1a18]'>{hoje}</p>
-            <p className='text-sm text-gray-400 mt-1'>atendimentos</p>
-          </div>
-          <div className='bg-[#edf5f0] border border-[#c8dfd0] rounded-xl p-5'>
-            <p className='text-xs text-[#7ab890] uppercase tracking-wide mb-2'>Pendentes</p>
-            <p className='text-3xl font-bold text-[#3d7a52]'>{pendentes}</p>
-            <p className='text-sm text-[#7ab890] mt-1'>para realizar</p>
-          </div>
+          <StatCard label='Total' value={total} suffix='agendamentos' />
+          <StatCard label='Hoje' value={hoje} suffix='atendimentos' />
+          <StatCard label='Pendentes' value={pendentes} suffix='para realizar' variant='green' />
         </div>
 
         <div className='bg-white border border-gray-200 rounded-xl'>
