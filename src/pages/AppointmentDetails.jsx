@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Header from '../components/Header'
+import StatusBadge from '../components/StatusBadge'
 
 function AppointmentDetails() {
   const { id } = useParams()
@@ -46,15 +47,8 @@ function AppointmentDetails() {
     navigate('/dashboard')
   }
 
-  const statusConfig = {
-    scheduled: { label: 'Agendado', dot: 'bg-[#3d7a52]', badge: 'bg-[#edf5f0] text-[#3d7a52]' },
-    completed: { label: 'Concluído', dot: 'bg-gray-400', badge: 'bg-gray-100 text-gray-500' },
-    cancelled: { label: 'Cancelado', dot: 'bg-red-400', badge: 'bg-red-50 text-red-500' },
-  }
-
   if (!appointment) return null
 
-  const config = statusConfig[appointment.status] || statusConfig.scheduled
   const data = new Date(appointment.dateTime).toLocaleString('pt-BR', {
     day: '2-digit', month: '2-digit', year: 'numeric',
     hour: '2-digit', minute: '2-digit'
@@ -77,10 +71,7 @@ function AppointmentDetails() {
             <h1 className='text-2xl font-bold text-[#1a1a18]'>Detalhes do agendamento</h1>
             <p className='text-sm text-gray-400'>{appointment.serviceType}</p>
           </div>
-          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${config.badge}`}>
-            <span className={`w-1.5 h-1.5 rounded-full ${config.dot}`}></span>
-            {config.label}
-          </span>
+          <StatusBadge status={appointment.status} />
         </div>
 
         <div className='bg-white border border-gray-200 rounded-xl p-6 mb-4'>
