@@ -6,6 +6,7 @@ import StatCard from '../components/StatCard'
 
 function Dashboard() {
   const [appointments, setAppointments] = useState([])
+  const [erro, setErro] = useState('')
   const [view, setView] = useState(window.innerWidth < 640 ? 'grid' : 'table')
   const navigate = useNavigate()
   const userName = localStorage.getItem('userName') || 'Profissional'
@@ -20,12 +21,17 @@ function Dashboard() {
 
   useEffect(() => {
     const fetchAppointments = async () => {
-      const token = localStorage.getItem('token')
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/appointments`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      const data = await response.json()
-      setAppointments(data)
+      try {
+        const token = localStorage.getItem('token')
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/appointments`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        })
+        if (!response.ok) throw new Error('Não foi possível carregar os agendamentos.')
+        const data = await response.json()
+        setAppointments(data)
+      } catch (err) {
+        setErro(err.message)
+      }
     }
     fetchAppointments()
   }, [])
@@ -44,6 +50,12 @@ function Dashboard() {
       <div className='max-w-5xl mx-auto px-6 py-8'>
         <h1 className='text-2xl font-bold text-[#1a1a18]'>Agendamentos</h1>
         <p className='text-sm text-gray-400 mb-6'>Seus atendimentos de serviços de jardinagem</p>
+
+        {erro && (
+          <div className='bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-3 mb-6'>
+            {erro}
+          </div>
+        )}
 
         <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6'>
           <StatCard label='Total' value={total} suffix='agendamentos' />

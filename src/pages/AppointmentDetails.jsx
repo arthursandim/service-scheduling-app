@@ -7,44 +7,54 @@ function AppointmentDetails() {
   const { id } = useParams()
   const navigate = useNavigate()
   const [appointment, setAppointment] = useState(null)
+  const [erro, setErro] = useState('')
   const userName = localStorage.getItem('userName') || 'Profissional'
 
   useEffect(() => {
     const fetchAppointment = async () => {
-      const token = localStorage.getItem('token')
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/appointments/${id}`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      const data = await response.json()
-      setAppointment(data)
+      try {
+        const token = localStorage.getItem('token')
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/appointments/${id}`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        })
+        if (!response.ok) throw new Error('Não foi possível carregar o agendamento.')
+        const data = await response.json()
+        setAppointment(data)
+      } catch (err) {
+        setErro(err.message)
+      }
     }
     fetchAppointment()
   }, [id])
 
   const handleCancel = async () => {
-    const token = localStorage.getItem('token')
-    await fetch(`${import.meta.env.VITE_API_URL}/appointments/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ status: 'cancelled' })
-    })
-    navigate('/dashboard')
+    try {
+      const token = localStorage.getItem('token')
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/appointments/${id}`, {
+        method: 'PUT',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'cancelled' })
+      })
+      if (!response.ok) throw new Error('Não foi possível cancelar o agendamento.')
+      navigate('/dashboard')
+    } catch (err) {
+      setErro(err.message)
+    }
   }
 
   const handleComplete = async () => {
-    const token = localStorage.getItem('token')
-    await fetch(`${import.meta.env.VITE_API_URL}/appointments/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ status: 'completed' })
-    })
-    navigate('/dashboard')
+    try {
+      const token = localStorage.getItem('token')
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/appointments/${id}`, {
+        method: 'PUT',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'completed' })
+      })
+      if (!response.ok) throw new Error('Não foi possível concluir o agendamento.')
+      navigate('/dashboard')
+    } catch (err) {
+      setErro(err.message)
+    }
   }
 
   if (!appointment) return null
@@ -65,6 +75,12 @@ function AppointmentDetails() {
         >
           ‹ Voltar para agendamentos
         </button>
+
+        {erro && (
+          <div className='bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-3 mb-6'>
+            {erro}
+          </div>
+        )}
 
         <div className='flex items-start justify-between mb-6'>
           <div>
