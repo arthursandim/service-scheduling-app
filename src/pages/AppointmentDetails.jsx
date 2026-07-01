@@ -76,7 +76,7 @@ function AppointmentDetails() {
 
         <div className='bg-white border border-gray-200 rounded-xl p-6 mb-4'>
           <p className='text-xs text-gray-400 uppercase tracking-wide mb-4'>Informações do cliente</p>
-          <div className='grid grid-cols-2 gap-4 mb-4'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4'>
             <div>
               <p className='text-xs text-gray-400 mb-1'>Nome</p>
               <p className='text-sm font-medium text-[#1a1a18]'>{appointment.customer?.name}</p>
@@ -94,7 +94,7 @@ function AppointmentDetails() {
           <hr className='my-4 border-gray-100' />
 
           <p className='text-xs text-gray-400 uppercase tracking-wide mb-4'>Detalhes do serviço</p>
-          <div className='grid grid-cols-2 gap-4'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
             <div>
               <p className='text-xs text-gray-400 mb-1'>Tipo de serviço</p>
               <p className='text-sm font-medium text-[#1a1a18]'>{appointment.serviceType}</p>
@@ -107,7 +107,7 @@ function AppointmentDetails() {
         </div>
 
         {podeAlterar ? (
-          <div className='grid grid-cols-2 gap-3'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
             <button
               onClick={handleCancel}
               className='py-3 rounded-xl border border-red-200 text-red-500 text-sm font-medium hover:bg-red-50'

@@ -6,9 +6,17 @@ import StatCard from '../components/StatCard'
 
 function Dashboard() {
   const [appointments, setAppointments] = useState([])
-  const [view, setView] = useState('table')
+  const [view, setView] = useState(window.innerWidth < 640 ? 'grid' : 'table')
   const navigate = useNavigate()
   const userName = localStorage.getItem('userName') || 'Profissional'
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) setView('grid')
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -37,7 +45,7 @@ function Dashboard() {
         <h1 className='text-2xl font-bold text-[#1a1a18]'>Agendamentos</h1>
         <p className='text-sm text-gray-400 mb-6'>Seus atendimentos de serviços de jardinagem</p>
 
-        <div className='grid grid-cols-3 gap-4 mb-6'>
+        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6'>
           <StatCard label='Total' value={total} suffix='agendamentos' />
           <StatCard label='Hoje' value={hoje} suffix='atendimentos' />
           <StatCard label='Pendentes' value={pendentes} suffix='para realizar' variant='green' />
@@ -69,6 +77,7 @@ function Dashboard() {
           </div>
 
           {view === 'table' ? (
+            <div className='overflow-x-auto'>
             <table className='w-full'>
               <thead>
                 <tr className='text-xs text-gray-400 uppercase tracking-wide'>
@@ -106,6 +115,7 @@ function Dashboard() {
                 })}
               </tbody>
             </table>
+            </div>
           ) : (
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-6'>
               {appointments.map(a => {
