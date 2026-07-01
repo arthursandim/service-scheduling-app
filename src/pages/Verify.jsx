@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import FormInput from '../components/FormInput'
 
 function Verify() {
   const [codigo, setCodigo] = useState('')
@@ -65,17 +66,14 @@ function Verify() {
         </p>
 
         <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-          <div className='flex flex-col gap-1'>
-            <label className='text-sm text-gray-500'>Código de verificação</label>
-            <input
-              type='text'
-              placeholder='000000'
-              maxLength={6}
-              value={codigo}
-              onChange={(e) => setCodigo(e.target.value)}
-              className='border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#3d7a52] tracking-widest text-center text-lg'
-            />
-          </div>
+          <FormInput
+            label='Código de verificação'
+            placeholder='000000'
+            maxLength={6}
+            value={codigo}
+            onChange={(e) => setCodigo(e.target.value)}
+            className='tracking-widest text-center text-lg'
+          />
 
           {erro && <p className='text-sm text-red-500'>{erro}</p>}
           {mensagem && <p className='text-sm text-green-600'>{mensagem}</p>}

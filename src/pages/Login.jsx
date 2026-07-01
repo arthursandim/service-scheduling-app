@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import FormInput from '../components/FormInput'
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -43,27 +44,20 @@ function Login() {
         <p className='text-sm text-gray-400 mb-6'>Entre na sua conta para gerenciar seus atendimentos</p>
 
         <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-          <div className='flex flex-col gap-1'>
-            <label className='text-sm text-gray-500'>E-mail</label>
-            <input
-              type='email'
-              placeholder='seu@email.com'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className='border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#3d7a52]'
-            />
-          </div>
-
-          <div className='flex flex-col gap-1'>
-            <label className='text-sm text-gray-500'>Senha</label>
-            <input
-              type='password'
-              placeholder='••••••••'
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-              className='border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#3d7a52]'
-            />
-          </div>
+          <FormInput
+            label='E-mail'
+            type='email'
+            placeholder='seu@email.com'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <FormInput
+            label='Senha'
+            type='password'
+            placeholder='••••••••'
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
 
           {erro && <p className='text-sm text-red-500'>{erro}</p>}
 
