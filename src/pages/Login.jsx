@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import AuthCard from '../components/AuthCard'
 import FormInput from '../components/FormInput'
 
 function Login() {
@@ -28,53 +29,41 @@ function Login() {
   }
 
   return (
-    <div className='min-h-screen bg-[#f5f5f3] flex items-center justify-center'>
-      <div className='bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-sm'>
-        <div className='flex items-center gap-3 mb-6'>
-          <div className='w-9 h-9 bg-[#3d7a52] rounded-xl flex items-center justify-center text-white'>
-            📅
-          </div>
-          <div>
-            <p className='font-semibold text-[#1a1a18]'>Sandim Jardinagem</p>
-            <p className='text-xs text-gray-400'>Gestão de agendamentos</p>
-          </div>
-        </div>
+    <AuthCard>
+      <h1 className='text-xl font-bold text-[#1a1a18] mb-1'>Bem-vindo</h1>
+      <p className='text-sm text-gray-400 mb-6'>Entre na sua conta para gerenciar seus atendimentos</p>
 
-        <h1 className='text-xl font-bold text-[#1a1a18] mb-1'>Bem-vindo</h1>
-        <p className='text-sm text-gray-400 mb-6'>Entre na sua conta para gerenciar seus atendimentos</p>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+        <FormInput
+          label='E-mail'
+          type='email'
+          placeholder='seu@email.com'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <FormInput
+          label='Senha'
+          type='password'
+          placeholder='••••••••'
+          value={senha}
+          onChange={(e) => setSenha(e.target.value)}
+        />
 
-        <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-          <FormInput
-            label='E-mail'
-            type='email'
-            placeholder='seu@email.com'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <FormInput
-            label='Senha'
-            type='password'
-            placeholder='••••••••'
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-          />
+        {erro && <p className='text-sm text-red-500'>{erro}</p>}
 
-          {erro && <p className='text-sm text-red-500'>{erro}</p>}
+        <button
+          type='submit'
+          className='bg-[#3d7a52] text-white rounded-lg py-2 text-sm font-medium hover:bg-[#336644] transition-colors'
+        >
+          Entrar
+        </button>
+      </form>
 
-          <button
-            type='submit'
-            className='bg-[#3d7a52] text-white rounded-lg py-2 text-sm font-medium hover:bg-[#336644] transition-colors'
-          >
-            Entrar
-          </button>
-        </form>
-
-        <p className='text-sm text-center text-gray-400 mt-4'>
-          Não tem conta?{' '}
-          <a href='/registro' className='text-[#3d7a52] font-medium'>Criar conta</a>
-        </p>
-      </div>
-    </div>
+      <p className='text-sm text-center text-gray-400 mt-4'>
+        Não tem conta?{' '}
+        <a href='/registro' className='text-[#3d7a52] font-medium'>Criar conta</a>
+      </p>
+    </AuthCard>
   )
 }
 
