@@ -82,6 +82,7 @@ test.describe('Detalhes do agendamento', () => {
 
   test('deve cancelar agendamento e voltar ao dashboard', async ({ page }) => {
     await page.goto('/dashboard');
+    await page.waitForLoadState('networkidle');
     await page.getByTestId('appointment-row').first().getByText('Ver detalhes').click();
     await page.getByTestId('cancel-button').click();
     await expect(page).toHaveURL(/dashboard/);
@@ -89,7 +90,8 @@ test.describe('Detalhes do agendamento', () => {
 
   test('deve concluir agendamento e voltar ao dashboard', async ({ page }) => {
     await page.goto('/dashboard');
-    await page.getByTestId('appointment-row').first().getByText('Ver detalhes').click();
+    await page.waitForLoadState('networkidle');
+    await page.getByTestId('appointment-row').nth(1).getByText('Ver detalhes').click();
     await page.getByTestId('complete-button').click();
     await expect(page).toHaveURL(/dashboard/);
   });
