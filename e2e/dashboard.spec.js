@@ -95,4 +95,30 @@ test.describe('Detalhes do agendamento', () => {
     await page.getByTestId('complete-button').click();
     await expect(page).toHaveURL(/dashboard/);
   });
+
+  test('agendamento concluído não deve exibir botões de ação', async ({ page }) => {
+    await page.goto('/dashboard');
+    await page.waitForLoadState('networkidle');
+    await page.getByTestId('appointment-row')
+      .filter({ has: page.getByText('Concluído') })
+      .first()
+      .getByText('Ver detalhes')
+      .click();
+    await expect(page.getByTestId('cancel-button')).not.toBeVisible();
+    await expect(page.getByTestId('complete-button')).not.toBeVisible();
+    await expect(page.getByText('Este agendamento não pode mais ser alterado.')).toBeVisible();
+  });
+
+  test('agendamento cancelado não deve exibir botões de ação', async ({ page }) => {
+    await page.goto('/dashboard');
+    await page.waitForLoadState('networkidle');
+    await page.getByTestId('appointment-row')
+      .filter({ has: page.getByText('Cancelado') })
+      .first()
+      .getByText('Ver detalhes')
+      .click();
+    await expect(page.getByTestId('cancel-button')).not.toBeVisible();
+    await expect(page.getByTestId('complete-button')).not.toBeVisible();
+    await expect(page.getByText('Este agendamento não pode mais ser alterado.')).toBeVisible();
+  });
 });
