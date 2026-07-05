@@ -1,7 +1,16 @@
 import { test as setup } from '@playwright/test';
 import fs from 'fs';
 
-setup('autenticar usuário de teste', async ({ page, context }) => {
+setup('autenticar usuário de teste', async ({ request, page, context }) => {
+  await request.delete(`${process.env.VITE_API_URL}/seed/reset`);
+
+  await request.post(`${process.env.VITE_API_URL}/seed/professional`, {
+    data: {
+      email: process.env.E2E_USER_EMAIL,
+      password: process.env.E2E_USER_PASSWORD,
+    },
+  });
+
   await page.goto('/login');
   await page.getByTestId('email-input').fill(process.env.E2E_USER_EMAIL);
   await page.getByTestId('password-input').fill(process.env.E2E_USER_PASSWORD);

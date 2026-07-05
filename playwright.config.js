@@ -13,7 +13,6 @@ dotenv.config({ path: path.resolve(__dirname, '../service-scheduling-api/.env') 
 const BASE_URL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:5173';
 
 export default defineConfig({
-    globalSetup: './e2e/global.setup.js',
     testDir: './e2e',
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
@@ -45,17 +44,4 @@ export default defineConfig({
     ],
 
 
-    webServer: [
-        {
-            command: 'npm run dev',
-            url: 'http://localhost:5173',
-            reuseExistingServer: !process.env.CI,
-        },
-        {
-            command: 'npm run start:test',
-            url: 'http://localhost:3000',
-            cwd: path.resolve(__dirname, '../service-scheduling-api'),
-            reuseExistingServer: false,
-        },
-    ],
 });
