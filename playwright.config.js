@@ -8,6 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 dotenv.config({ override: true, path: path.resolve(__dirname, '.env') });
+dotenv.config({ path: path.resolve(__dirname, '../service-scheduling-api/.env') });
 
 const BASE_URL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:5173';
 
@@ -34,9 +35,17 @@ export default defineConfig({
         },
     ],
 
-    webServer: {
-        command: 'npm run dev',
-        url: 'http://localhost:5173',
-        reuseExistingServer: !process.env.CI,
-    },
+    webServer: [
+        {
+            command: 'npm run dev',
+            url: 'http://localhost:5173',
+            reuseExistingServer: !process.env.CI,
+        },
+        {
+            command: 'npm run start:test',
+            url: 'http://localhost:3000',
+            cwd: path.resolve(__dirname, '../service-scheduling-api'),
+            reuseExistingServer: false,
+        },
+    ],
 });
