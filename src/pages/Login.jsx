@@ -43,6 +43,7 @@ function Login() {
           placeholder='seu@email.com'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          testId='email-input'
         />
         <FormInput
           label='Senha'
@@ -50,12 +51,14 @@ function Login() {
           placeholder='••••••••'
           value={senha}
           onChange={(e) => setSenha(e.target.value)}
+          testId='password-input'
         />
 
-        {erro && <p className='text-sm text-red-500'>{erro}</p>}
+        {erro && <p className='text-sm text-red-500' data-testid='error-message'>{erro}</p>}
 
         <button
           type='submit'
+          data-testid='login-button'
           className='bg-[#3d7a52] text-white rounded-lg py-2 text-sm font-medium hover:bg-[#336644] transition-colors'
         >
           Entrar

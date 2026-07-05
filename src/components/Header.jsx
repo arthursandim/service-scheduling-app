@@ -23,6 +23,7 @@ function Header({ userName }) {
           </span>
           <button
             onClick={handleLogout}
+            data-testid='logout-button'
             className='text-sm px-3 py-1 border border-gray-200 rounded-md text-gray-600 hover:bg-gray-50'
           >
             Sair

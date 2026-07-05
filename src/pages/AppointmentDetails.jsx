@@ -77,7 +77,7 @@ function AppointmentDetails() {
         </button>
 
         {erro && (
-          <div className='bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-3 mb-6'>
+          <div data-testid='error-message' className='bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-3 mb-6'>
             {erro}
           </div>
         )}
@@ -126,12 +126,14 @@ function AppointmentDetails() {
           <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
             <button
               onClick={handleCancel}
+              data-testid='cancel-button'
               className='py-3 rounded-xl border border-red-200 text-red-500 text-sm font-medium hover:bg-red-50'
             >
               Cancelar agendamento
             </button>
             <button
               onClick={handleComplete}
+              data-testid='complete-button'
               className='py-3 rounded-xl bg-[#3d7a52] text-white text-sm font-medium hover:bg-[#336644]'
             >
               Marcar como concluído

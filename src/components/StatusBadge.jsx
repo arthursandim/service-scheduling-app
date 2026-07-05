@@ -7,7 +7,7 @@ const statusConfig = {
 function StatusBadge({ status }) {
   const config = statusConfig[status] || statusConfig.scheduled
   return (
-    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${config.badge}`}>
+    <span data-testid='status-badge' className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${config.badge}`}>
       <span className={`w-1.5 h-1.5 rounded-full ${config.dot}`}></span>
       {config.label}
     </span>

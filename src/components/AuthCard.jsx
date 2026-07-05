@@ -1,7 +1,7 @@
 function AuthCard({ children }) {
   return (
     <div className='min-h-screen bg-[#f5f5f3] flex items-center justify-center'>
-      <div className='bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-sm'>
+      <div data-testid='auth-card' className='bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-sm'>
         <div className='flex items-center gap-3 mb-6'>
           <div className='w-9 h-9 bg-[#3d7a52] rounded-xl flex items-center justify-center text-white'>
             📅

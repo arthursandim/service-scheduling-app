@@ -46,6 +46,7 @@ function Register() {
                     placeholder='Seu nome'
                     value={nome}
                     onChange={(e) => setNome(e.target.value)}
+                    testId='name-input'
                 />
                 <FormInput
                     label='E-mail'
@@ -53,6 +54,7 @@ function Register() {
                     placeholder='seu@email.com'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    testId='email-input'
                 />
                 <FormInput
                     label='Senha'
@@ -60,13 +62,15 @@ function Register() {
                     placeholder='••••••••'
                     value={senha}
                     onChange={(e) => setSenha(e.target.value)}
+                    testId='password-input'
                 />
 
-                {erro && <p className='text-sm text-red-500'>{erro}</p>}
+                {erro && <p className='text-sm text-red-500' data-testid='error-message'>{erro}</p>}
 
                 <button
                     type='submit'
                     disabled={loading}
+                    data-testid='register-button'
                     className='bg-[#3d7a52] text-white rounded-lg py-2 text-sm font-medium hover:bg-[#336644] transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
                 >
                     {loading ? 'Criando...' : 'Criar conta'}

@@ -63,13 +63,15 @@ function Verify() {
           value={codigo}
           onChange={(e) => setCodigo(e.target.value)}
           className='tracking-widest text-center text-lg'
+          testId='verify-code-input'
         />
 
-        {erro && <p className='text-sm text-red-500'>{erro}</p>}
-        {mensagem && <p className='text-sm text-green-600'>{mensagem}</p>}
+        {erro && <p className='text-sm text-red-500' data-testid='error-message'>{erro}</p>}
+        {mensagem && <p className='text-sm text-green-600' data-testid='success-message'>{mensagem}</p>}
 
         <button
           type='submit'
+          data-testid='verify-button'
           className='bg-[#3d7a52] text-white rounded-lg py-2 text-sm font-medium hover:bg-[#336644] transition-colors'
         >
           Confirmar

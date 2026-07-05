@@ -52,15 +52,15 @@ function Dashboard() {
         <p className='text-sm text-gray-400 mb-6'>Seus atendimentos de serviços de jardinagem</p>
 
         {erro && (
-          <div className='bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-3 mb-6'>
+          <div data-testid='error-message' className='bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-3 mb-6'>
             {erro}
           </div>
         )}
 
         <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6'>
-          <StatCard label='Total' value={total} suffix='agendamentos' />
-          <StatCard label='Hoje' value={hoje} suffix='atendimentos' />
-          <StatCard label='Pendentes' value={pendentes} suffix='para realizar' variant='green' />
+          <StatCard label='Total' value={total} suffix='agendamentos' testId='stat-total' />
+          <StatCard label='Hoje' value={hoje} suffix='atendimentos' testId='stat-hoje' />
+          <StatCard label='Pendentes' value={pendentes} suffix='para realizar' variant='green' testId='stat-pendentes' />
         </div>
 
         <div className='bg-white border border-gray-200 rounded-xl'>
@@ -69,6 +69,7 @@ function Dashboard() {
             <div className='flex gap-1'>
               <button
                 onClick={() => setView('table')}
+                data-testid='view-table-button'
                 className={`p-1.5 rounded-md transition-colors ${view === 'table' ? 'bg-gray-100 text-[#1a1a18]' : 'text-gray-400 hover:text-gray-600'}`}
                 title='Visualização em tabela'
               >
@@ -78,6 +79,7 @@ function Dashboard() {
               </button>
               <button
                 onClick={() => setView('grid')}
+                data-testid='view-grid-button'
                 className={`p-1.5 rounded-md transition-colors ${view === 'grid' ? 'bg-gray-100 text-[#1a1a18]' : 'text-gray-400 hover:text-gray-600'}`}
                 title='Visualização em grade'
               >
@@ -107,7 +109,7 @@ function Dashboard() {
                     hour: '2-digit', minute: '2-digit'
                   }).replace(',', ' às')
                   return (
-                    <tr key={a._id} className='border-t border-gray-100'>
+                    <tr key={a._id} data-testid='appointment-row' className='border-t border-gray-100'>
                       <td className='px-6 py-4 text-sm font-medium text-[#1a1a18]'>{a.customer?.name}</td>
                       <td className='px-6 py-4 text-sm text-gray-500'>{a.serviceType}</td>
                       <td className='px-6 py-4 text-sm text-gray-500'>{data}</td>
@@ -136,7 +138,7 @@ function Dashboard() {
                   hour: '2-digit', minute: '2-digit'
                 }).replace(',', ' às')
                 return (
-                  <div key={a._id} className='border border-gray-200 rounded-xl p-4 flex flex-col gap-3'>
+                  <div key={a._id} data-testid='appointment-card' className='border border-gray-200 rounded-xl p-4 flex flex-col gap-3'>
                     <div className='flex items-start justify-between'>
                       <p className='text-sm font-medium text-[#1a1a18]'>{a.customer?.name}</p>
                       <StatusBadge status={a.status} />
