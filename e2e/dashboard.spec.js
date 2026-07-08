@@ -3,7 +3,7 @@ import fs from 'fs';
 
 test.describe.configure({ mode: 'serial' });
 
-const apiUrl = process.env.VITE_API_URL;
+const apiUrl = process.env.PLAYWRIGHT_API_URL;
 
 test.beforeAll(async ({ request }) => {
   const { token } = JSON.parse(fs.readFileSync('.auth/session.json', 'utf-8'));
